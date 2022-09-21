@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www:thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+    <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+    <script>
+        function a1() {
+            $.ajax({
+                url:"http://localhost:8080/ajax/a1",
+                data:{"name":$("#username").val()},
+                success:function (data,status) {
+                    console.log(data);
+                    console.log(status);
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function a2() {
+            $.ajax({
+                url:"http://localhost:8080/ajax/a2",
+                success:function (data) {
+                    console.log(data);
+                    //将数据进行遍历
+                    var ul = $("<ul></ul>");
+                    //将数据进行遍历
+                    for(var i = 0; i<data.length; i++){//result.length:得到的数据的长度
+                        //接收数据
+                        var user = data[i];//user为一个对象
+                        //将数据进行排列
+                        var li = "<li>"+user.id+user.name+user.age+user.email+user.password+"</li>";
+                        //将li放入ul元素中
+                        ul.append(li);
+                    }
+                    //将ul放入body中
+                    $("body").append(ul);
+                }
+            });
+
+        }
+    </script>
+
+    <script>
+        function a3() {
+            $.ajax({
+                url:"http://localhost:8080/ajax/a3",
+                data:{
+                    "username":$("#username").val()
+                },
+                success:function (data) {
+                    if (data.toString()==''){
+                        alert("登录成功");
+                    }else {
+                        $("#userInfo").css("color","red")
+                    }
+                    $("#userInfo").html(data);
+                }
+            });
+
+        }
+    </script>
+
+    <!--<script>
+        function a4() {
+            $.ajax({
+                url:"http://localhost:8080/ajax/a3",
+                data:{
+                    "password":$("#password").val()
+                },
+                success:function (data) {
+                    console.log(data);
+                }
+            });
+
+        }
+    </script>-->
+</head>
+<body>
+<div>
+    用户名:<input type="text" id="username" onblur="a3()">
+    <span id="userInfo"></span>
+   <!-- 密码:<input type="password" id="password" onblur="a4()">
+    <span id="pwdInfo"></span>-->
+</div>
+
+<!--用户名:<input type="text" id="username" onblur="a1()">
+
+<button id="btn" onclick="a2()">点击获取数据</button>-->
+
+</body>
+</html>
