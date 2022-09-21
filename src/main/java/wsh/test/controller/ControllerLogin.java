@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ControllerLogin {
+    
+    /**
+     * @description:
+     * @author: wsh 
+     * @date: 2022/9/21 14:24
+     * @param: []
+     * @return: java.lang.String
+     **/
 
     @RequestMapping("/login")
     public String login(){
